@@ -11,31 +11,31 @@ import com.example.jobappwithdb.repositories.WorkerRepository;
 
 @Service
 public class WorkerService {
-    
+
     @Autowired
     WorkerRepository repository;
 
-    public void addWorker(Worker worker){
+    public void addWorker(Worker worker) {
         repository.addWorker(worker);
     }
 
-    public List<Worker> listAllWorkers(){
+    public List<Worker> listAllWorkers() {
         return repository.listAllWorkers();
     }
 
-    public Worker findByEmail(String email){
+    public Worker findByEmail(String email) {
         return repository.findByEmail(email);
     }
 
-    public Optional<Worker> findById(Long id){
+    public Optional<Worker> findById(Long id) {
         return repository.findById(id);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
-    public void updateById(Long id, Worker newWorker){
+    public void updateById(Long id, Worker newWorker) {
         repository.updateById(id, newWorker);
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Worker {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -30,12 +30,14 @@ public class Worker {
     @Column(name = "age", nullable = false)
     private int age;
 
-    Worker(){}
+    Worker() {
+    }
 
-    public Worker(String firstName, String lastName, String email, String role, int age){
+    public Worker(String firstName, String lastName, String email, String password, String role, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.role = role;
         this.age = age;
     }
@@ -70,6 +72,14 @@ public class Worker {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {

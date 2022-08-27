@@ -14,10 +14,10 @@ public class WorkerConfig {
     WorkerRepository repository;
 
     @Bean
-    CommandLineRunner onStartUp(){
+    CommandLineRunner onStartUp() {
         return args -> {
-            repository.addWorker(new Worker("Dimitar", "Manolev", "dimitar@emailcom", "Manager", 20));
-            repository.addWorker(new Worker("Nasence", "Lud", "nasence@emailcom", "Manager", 20));
+            repository.addWorker(new Worker("Dimitar", "Manolev", "dimitar@emailcom", "mitkopas", "Manager", 20));
+            repository.addWorker(new Worker("Nasence", "Lud", "nasence@emailcom", "nasencepas", "Manager", 20));
         };
     }
 
