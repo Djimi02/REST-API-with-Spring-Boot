@@ -21,6 +21,9 @@ public class Worker {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -33,10 +36,11 @@ public class Worker {
     Worker() {
     }
 
-    public Worker(String firstName, String lastName, String email, String password, String role, int age) {
+    public Worker(String firstName, String lastName, String email, String userName, String password, String role, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.userName = userName;
         this.password = password;
         this.role = role;
         this.age = age;
@@ -72,6 +76,14 @@ public class Worker {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

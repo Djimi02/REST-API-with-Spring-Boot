@@ -40,6 +40,14 @@ public class WorkerRepository {
         }
     }
 
+    public Worker findByUserName(String userName) {
+        if (repository.findByUserName(userName) == null) {
+            throw new IllegalStateException("Worker with username " + userName + " does not exists");
+        } else {
+            return repository.findByUserName(userName);
+        }
+    }
+
     public void deleteById(Long id) {
         boolean exists = repository.existsById(id);
 

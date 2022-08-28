@@ -21,7 +21,7 @@ public class Controller {
     @Autowired
     WorkerService service;
 
-    @PostMapping("/addworker")
+    @PostMapping("/worker/add")
     public void addWorker(@RequestBody Worker worker) {
         service.addWorker(worker);
     }
@@ -31,23 +31,33 @@ public class Controller {
         return service.listAllWorkers();
     }
 
-    @GetMapping("/getworkerbyid/{id}")
+    @GetMapping("/worker/getbyid/{id}")
     public Optional<Worker> findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/getworkerbyemail/{email}")
+    @GetMapping("/worker/getbyemail/{email}")
     public Worker findByEmail(@PathVariable(value = "email") String email) {
         return service.findByEmail(email);
     }
 
-    @DeleteMapping("/deleteworkerbyid/{id}")
+    @GetMapping("/worker")
+    public String worker() {
+        return "Hello Worker";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "Hello Admin";
+    }
+
+    @DeleteMapping("/worker/deletebyid/{id}")
     public String deleteById(@PathVariable(value = "id") Long id) {
         service.deleteById(id);
         return "Worker with id " + id + " has been deleted";
     }
 
-    @PutMapping("/updateworkerbyid/{id}")
+    @PutMapping("/worker/updatebyid/{id}")
     public String updateById(@PathVariable(value = "id") Long id, @RequestBody Worker newWorker) {
         service.updateById(id, newWorker);
         return "Worker with id " + id + " has been updated";
