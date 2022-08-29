@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jobappwithdb.models.Worker;
+import com.example.jobappwithdb.security.IAuthenticationFacade;
 import com.example.jobappwithdb.services.WorkerService;
 
 @RestController
@@ -21,6 +23,9 @@ public class WorkerController {
 
     @Autowired
     WorkerService service;
+
+    @Autowired
+    IAuthenticationFacade authenticationFacade;
 
     @GetMapping("/admin/getallworkers")
     public List<Worker> listAllWorkers() {
@@ -38,13 +43,16 @@ public class WorkerController {
     }
 
     @GetMapping("/worker")
-    public String worker() {
-        return "Hello Worker";
+    @ResponseBody
+    public Worker worker() {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        return service.findByUserName(authentication.getName());
     }
 
     @GetMapping("/admin")
-    public String admin() {
-        return "Hello Admin";
+    public Worker admin() {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        return service.findByUserName(authentication.getName());
     }
 
     // @GetMapping("/test/{userName}")
