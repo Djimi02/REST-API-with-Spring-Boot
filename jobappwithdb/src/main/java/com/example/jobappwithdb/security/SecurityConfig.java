@@ -8,9 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -22,9 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     NoOpPasswordEncoder passwordEncoder;
 
+    
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //ne chete rolite i ne puska v stranicite
+
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 
         // auth.inMemoryAuthentication().withUser("mitko").password("mitko").roles("ADMIN").and()
@@ -33,9 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/worker").hasRole("WORKER").and().authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN").and().authorizeRequests()
-                .antMatchers("/").permitAll().and().formLogin();
+        http.authorizeRequests()
+            .antMatchers("/admin/**").hasAuthority("ADMIN")
+            .antMatchers("/worker/**").hasAnyAuthority("WORKER", "ADMIN")
+            .antMatchers("/register").permitAll()
+            .antMatchers("/").permitAll()
+            .and().formLogin();
     }
 
 }

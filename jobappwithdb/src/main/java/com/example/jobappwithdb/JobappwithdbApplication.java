@@ -13,9 +13,4 @@ public class JobappwithdbApplication {
 		SpringApplication.run(JobappwithdbApplication.class, args);
 	}
 
-	@Bean
-    public NoOpPasswordEncoder passwordEncoderBean() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
-
 }

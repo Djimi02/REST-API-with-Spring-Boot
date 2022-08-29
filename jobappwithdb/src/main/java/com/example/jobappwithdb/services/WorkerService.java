@@ -1,6 +1,7 @@
 package com.example.jobappwithdb.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,10 @@ public class WorkerService implements UserDetailsService {
         return repository.findById(id);
     }
 
+    public Worker findByUserName(String userName){
+        return repository.findByUserName(userName);
+    }
+
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
@@ -55,6 +60,8 @@ public class WorkerService implements UserDetailsService {
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(worker.getRole()));
+        System.out.println(Arrays.toString(authorities.toArray()));
+        
         
         return new org.springframework.security.core.userdetails.User(worker.getUserName(), worker.getPassword(), authorities);
     }

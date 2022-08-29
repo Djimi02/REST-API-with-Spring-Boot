@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import com.example.jobappwithdb.models.Worker;
 import com.example.jobappwithdb.repositories.WorkerRepository;
@@ -12,6 +13,11 @@ import com.example.jobappwithdb.repositories.WorkerRepository;
 public class WorkerConfig {
     @Autowired
     WorkerRepository repository;
+
+    @Bean
+    public NoOpPasswordEncoder passwordEncoderBean() {
+        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    }
 
     @Bean
     CommandLineRunner onStartUp() {
